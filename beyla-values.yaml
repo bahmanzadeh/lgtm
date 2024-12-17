@@ -1,0 +1,13 @@
+config:
+  data:
+    open_port: 8443
+    log_level: info
+    otel_metrics_export:
+      endpoint: http://alloy:4318
+    otel_traces_export:
+      endpoint: http://alloy:4318
+    discovery:
+      services:
+      - k8s_namespace: yelb
+    routes:
+      unmatched: heuristic

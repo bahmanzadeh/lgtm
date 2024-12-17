@@ -1,0 +1,11 @@
+adminUser: admin  # Default admin username
+adminPassword: admin123  # Default admin password
+
+service:
+  type: ClusterIP
+  port: 3000  # Port to expose Grafana
+  targetPort: 3000  # Grafana container port
+
+persistence:
+  enabled: true
+

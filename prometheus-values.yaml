@@ -1,0 +1,50 @@
+alertmanager:
+  enabled: false # Disable alertmanager for simplicity
+
+serverFiles:
+  prometheus.yml:
+    scrape_configs:
+    - job_name: "node-exporter"
+      static_configs:
+      - targets:
+        - "prometheus-prometheus-node-exporter.lgtm.svc.cluster.local:9100"
+    - job_name: "kube-state-metrics"
+      kubernetes_sd_configs:
+        - role: endpoints
+      relabel_configs:
+        - source_labels: [__meta_kubernetes_service_name]
+          regex: kube-state-metrics
+          action: keep
+        - action: labelmap
+          regex: __meta_kubernetes_service_label_(.+)
+        - source_labels: [__meta_kubernetes_namespace]
+          action: replace
+          target_label: kubernetes_namespace
+        - source_labels: [__meta_kubernetes_service_name]
+          action: replace
+          target_label: kubernetes_name
+      static_configs:
+      - targets:
+        - "prometheus-kube-state-metrics.lgtm.svc.cluster.local:8080"
+    - job_name: "pushgateway"
+      static_configs:
+      - targets:
+        - "prometheus-prometheus-pushgateway.lgtm.svc.cluster.local:9091"
+
+prometheus-pushgateway:
+  enabled: true
+
+server:
+  securityContext:
+    runAsUser: 0
+    runAsNonRoot: false
+    runAsGroup: 0
+    fsGroup: 0
+  persistentVolume:
+    enabled: true # Disable persistence for simplicity (ephemeral storage) 
+  service:
+    type: ClusterIP
+    servicePort: 9090 # Port to expose Prometheus server
+
+global:
+  scrape_interval: 5s
