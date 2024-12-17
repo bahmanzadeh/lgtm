@@ -1,3 +1,4 @@
+Grafana LGTM stack installation using Helm chart
 ------------------ urls -----------------------
 
 for grafana: 192.168.1.208:3000
@@ -24,5 +25,6 @@ kubectl create configmap alloy-config --namespace monitoring "--from-file=config
 helm upgrade --install alloy grafana/alloy -n monitoring -f alloy-values.yaml
 
 helm upgrade --install beyla grafana/beyla -n monitoring -f beyla-values.yaml
+
 
 
