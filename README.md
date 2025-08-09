@@ -3,7 +3,9 @@
 ![](https://github.com/bahmanzadeh/lgtm/blob/main/lgtm-stack.png)
 ## Grafana Architecture with OpenTelemetry Integration
 ![](https://github.com/bahmanzadeh/lgtm/blob/main/lgtm.png)
+
 ----
+
 ## Adding helm charts repo
 ```bash
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
@@ -23,7 +25,9 @@ helm upgrade --install grafana grafana/grafana -n lgtm -f grafana-values.yaml
 kubectl port-forward --address 192.168.1.208 svc/grafana 3000:3000 -n lgtm
 ```
 Connect to Grafana: http://192.168.1.208:3000
+
 ----
+
 ## Bonus: Install Alloy and Beyla in the monitoring namespace
 ```bash
 kubectl create namespace monitoring
