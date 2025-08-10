@@ -28,7 +28,7 @@ Connect to Grafana: http://192.168.1.208:3000
 
 ----
 
-## Bonus: Install Alloy and Beyla in the monitoring namespace
+## Install Alloy and Beyla in the monitoring namespace
 ```bash
 kubectl create namespace monitoring
 kubectl create configmap alloy-config --namespace monitoring "--from-file=config.alloy=./alloy-config.alloy"
